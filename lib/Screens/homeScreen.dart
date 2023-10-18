@@ -1,8 +1,13 @@
+import 'package:alifouadapp/Controllers/UserInfoController.dart';
 import 'package:alifouadapp/Controls/normalbutton.dart';
 import 'package:alifouadapp/Screens/updateinfoScreen.dart';
+import 'package:alifouadapp/Screens/welcomeScreen.dart';
 import 'package:alifouadapp/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+
+final userInfoController = Get.find<UserInfoController>();
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,9 +26,9 @@ class HomePage extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                Text(
-                  "Test01 t",
-                ),
+                Obx(() => Text(
+                      userInfoController.userFullname.value,
+                    )),
               ],
             ),
             Row(
@@ -35,7 +40,9 @@ class HomePage extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                Text("+971 559944652"),
+                Obx(() => Text(
+                      userInfoController.userPhone.value,
+                    )),
               ],
             ),
             Row(
@@ -47,35 +54,40 @@ class HomePage extends StatelessWidget {
                     color: primaryColor,
                   ),
                 ),
-                Text("test@test.test"),
+                Obx(() => Text(
+                      userInfoController.userEmail.value,
+                    )),
               ],
             ),
             normalbutton(
-              () => {Get.to(() => UpdateinfoPage())},
               Row(
                   children: [Text("Update Information"), Icon(Icons.chevron_right)],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween),
+              () => {Get.to(() => UpdateinfoPage())},
               BorderEnabled: false,
             ),
             normalbutton(
-              () => {},
               Row(
                   children: [Text("Change Password"), Icon(Icons.chevron_right)],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween),
+              () => {},
               BorderEnabled: false,
             ),
             normalbutton(
-              () => {},
               Row(
                   children: [Text("Delete Account"), Icon(Icons.chevron_right)],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween),
+              () => {},
               BorderEnabled: false,
             ),
             normalbutton(
-              () => {},
               Row(
                   children: [Text("Logout"), Icon(Icons.chevron_right)],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween),
+              () => {
+                Get.offAll(WelcomeScreen()),
+                FlutterSecureStorage().deleteAll(),
+              },
               BorderEnabled: false,
             ),
           ]),

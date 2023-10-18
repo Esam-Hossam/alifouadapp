@@ -1,10 +1,16 @@
+import 'package:alifouadapp/Controllers/UserBinding.dart';
+import 'package:alifouadapp/Controllers/UserInfoController.dart';
 import 'package:alifouadapp/Controls/actionbutton.dart';
 import 'package:alifouadapp/Screens/homeScreen.dart';
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class UpdateinfoPage extends StatelessWidget {
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,47 +26,60 @@ class UpdateinfoPage extends StatelessWidget {
                   runAlignment: WrapAlignment.center,
                   runSpacing: 15,
                   children: [
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        filled: true,
-                        hintText: "Full Name",
-                        fillColor: Colors.white,
-                      ),
-                      controller: TextEditingController()..text = "test01 t",
-                    ),
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
+                    Obx(
+                      () => TextFormField(
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           filled: true,
-                          hintText: "Phone Number",
+                          hintText: "Full Name",
                           fillColor: Colors.white,
-                          prefix: CountryFlag.fromCountryCode(
-                            "ae",
-                            height: 20,
-                            width: 30,
-                          )),
-                      controller: TextEditingController()..text = "559944652",
-                    ),
-                    TextFormField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
                         ),
-                        filled: true,
-                        hintText: "Email Address",
-                        fillColor: Colors.white,
+                        controller: fullNameController..text = userInfoController.userFullname.value,
                       ),
-                      controller: TextEditingController()..text = "test@test.test",
                     ),
-                    actionbutton(() {
+                    Obx(
+                      () => TextFormField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            filled: true,
+                            hintText: "Phone Number",
+                            fillColor: Colors.white,
+                            prefix: CountryFlag.fromCountryCode(
+                              "ae",
+                              height: 20,
+                              width: 30,
+                            )),
+                        controller: phoneController..text = userInfoController.userPhone.value,
+                      ),
+                    ),
+                    Obx(
+                      () => TextFormField(
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          filled: true,
+                          hintText: "Email Address",
+                          fillColor: Colors.white,
+                        ),
+                        controller: emailController..text = userInfoController.userEmail.value,
+                      ),
+                    ),
+                    actionbutton(Text("Save"), () {
+                      userInfoController.updateUserInfo(
+                        fullName: fullNameController.text,
+                        email: emailController.text,
+                        phone: phoneController.text,
+                      );
                       Get.offAll(() => HomePage());
                       Get.showSnackbar(GetSnackBar(
                         title: "Success",
@@ -72,7 +91,7 @@ class UpdateinfoPage extends StatelessWidget {
                         animationDuration: Duration(milliseconds: 500),
                         backgroundColor: Color.fromARGB(255, 77, 174, 80),
                       ));
-                    }, Text("Save")),
+                    }),
                   ],
                 ),
               ),

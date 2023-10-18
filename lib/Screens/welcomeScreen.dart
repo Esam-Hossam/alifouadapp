@@ -21,12 +21,12 @@ class WelcomeScreen extends StatelessWidget {
                   runAlignment: WrapAlignment.center,
                   runSpacing: 15,
                   children: [
-                    actionbutton(() {
+                    actionbutton(Text("Login"), () {
                       Get.to(() => LoginPage());
-                    }, Text("Login")),
-                    normalbutton(() {
+                    }),
+                    normalbutton(Text("Register"), () {
                       Get.to(() => RegistrationPage());
-                    }, Text("Register")),
+                    }),
                   ],
                 ),
               ),

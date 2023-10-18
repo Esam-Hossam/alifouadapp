@@ -1,3 +1,4 @@
+import 'package:alifouadapp/Actions/Do_Register.dart';
 import 'package:alifouadapp/Controls/actionbutton.dart';
 import 'package:alifouadapp/Controls/header.dart';
 import 'package:alifouadapp/Screens/loginScreen.dart';
@@ -6,6 +7,8 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'homeScreen.dart';
 
 bool _secureText = true;
 
@@ -19,6 +22,13 @@ class _RegistrationPage extends State<RegistrationPage> {
       _secureText = !_secureText;
     });
   }
+
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmpasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +54,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                             runSpacing: 15,
                             children: [
                               TextFormField(
+                                controller: fullNameController,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -55,6 +66,8 @@ class _RegistrationPage extends State<RegistrationPage> {
                                 ),
                               ),
                               TextFormField(
+                                controller: phoneController,
+                                keyboardType: TextInputType.phone,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -70,6 +83,8 @@ class _RegistrationPage extends State<RegistrationPage> {
                                     )),
                               ),
                               TextFormField(
+                                controller: emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 textAlign: TextAlign.center,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
@@ -81,6 +96,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                                 ),
                               ),
                               TextFormField(
+                                  controller: passwordController,
                                   textAlign: TextAlign.center,
                                   obscureText: _secureText,
                                   decoration: InputDecoration(
@@ -112,6 +128,7 @@ class _RegistrationPage extends State<RegistrationPage> {
                                     return null;
                                   }),
                               TextFormField(
+                                  controller: confirmpasswordController,
                                   textAlign: TextAlign.center,
                                   obscureText: _secureText,
                                   decoration: InputDecoration(
@@ -142,7 +159,19 @@ class _RegistrationPage extends State<RegistrationPage> {
                                     }
                                     return null;
                                   }),
-                              actionbutton(() {}, Text("Register")),
+                              actionbutton(
+                                Text("Register"),
+                                () {
+                                  Do_Register(
+                                    fullNameController.text,
+                                    phoneController.text,
+                                    emailController.text,
+                                    passwordController.text,
+                                    confirmpasswordController.text,
+                                    countryController.text,
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         ),

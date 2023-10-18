@@ -1,10 +1,13 @@
+import 'package:alifouadapp/Controllers/UserBinding.dart';
 import 'package:alifouadapp/Screens/welcomeScreen.dart';
 import 'package:alifouadapp/Controls/controlthemes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 void main() {
+  UserBinding().dependencies();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: primaryColor,
   ));
@@ -21,6 +24,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: GetMaterialApp(
+        smartManagement: SmartManagement.full,
+        initialBinding: UserBinding(),
         theme: ThemeData(
           appBarTheme: AppBarTheme(
               backgroundColor: primaryColor,
@@ -35,6 +40,7 @@ class MainApp extends StatelessWidget {
         ),
         home: WelcomeScreen(),
         debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
       ),
     );
   }

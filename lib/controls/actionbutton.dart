@@ -10,8 +10,8 @@ class actionbutton extends StatelessWidget {
   bool BorderEnabled = true;
 
   actionbutton(
-    this.action,
-    this.ButtonText, {
+    this.ButtonText,
+    this.action, {
     this.ButtonBackground = primaryColor,
     this.ButtonForeground = Colors.white,
     this.BorderEnabled = true,

@@ -1,17 +1,25 @@
+import 'dart:convert';
+
+import 'package:alifouadapp/Controllers/UserInfoController.dart';
 import 'package:alifouadapp/Controls/header.dart';
+import 'package:alifouadapp/Controls/normalbutton.dart';
+import 'package:alifouadapp/Helpers/easyloader.dart';
+import 'package:alifouadapp/Helpers/httprequests.dart';
 import 'package:alifouadapp/Screens/homeScreen.dart';
 import 'package:alifouadapp/Screens/registerScreen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
+import '../Actions/Do_Login.dart';
 import '../Controls/actionbutton.dart';
 import '../main.dart';
 
 bool _secureText = true;
 
 class LoginPage extends StatefulWidget {
-  State<LoginPage> createState() => _LoginPage();
+  State<LoginPage> createState() => new _LoginPage();
 }
 
 class _LoginPage extends State<LoginPage> {
@@ -20,6 +28,9 @@ class _LoginPage extends State<LoginPage> {
       _secureText = !_secureText;
     });
   }
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +47,7 @@ class _LoginPage extends State<LoginPage> {
               runSpacing: 15,
               children: [
                 TextFormField(
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
@@ -48,6 +60,7 @@ class _LoginPage extends State<LoginPage> {
                   ),
                 ),
                 TextFormField(
+                    controller: passwordController,
                     textAlign: TextAlign.center,
                     obscureText: _secureText,
                     decoration: InputDecoration(
@@ -78,9 +91,12 @@ class _LoginPage extends State<LoginPage> {
                       }
                       return null;
                     }),
-                actionbutton(() {
-                  Get.offAll(() => HomePage());
-                }, const Text("Login")),
+                actionbutton(
+                  const Text("Login"),
+                  () {
+                    Do_Login(emailController.text, passwordController.text);
+                  },
+                ),
               ],
             ),
           ),

@@ -10,8 +10,8 @@ class normalbutton extends StatelessWidget {
   bool BorderEnabled = true;
 
   normalbutton(
-    this.action,
-    this.ButtonText, {
+    this.ButtonText,
+    this.action, {
     this.ButtonBackground = Colors.white,
     this.ButtonForeground = primaryColor,
     this.BorderEnabled = true,
