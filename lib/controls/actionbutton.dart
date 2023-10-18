@@ -25,12 +25,9 @@ class actionbutton extends StatelessWidget {
         style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(ButtonBackground),
             foregroundColor: MaterialStatePropertyAll(ButtonForeground),
-            textStyle: MaterialStatePropertyAll(TextStyle(
-                fontFamily: primaryFont,
-                fontWeight: FontWeight.bold,
-                fontSize: 18)),
-            side: MaterialStatePropertyAll(BorderSide(
-                color: BorderEnabled ? primaryColor : Colors.transparent))),
+            textStyle:
+                MaterialStatePropertyAll(TextStyle(fontFamily: primaryFont, fontWeight: FontWeight.bold, fontSize: 18)),
+            side: MaterialStatePropertyAll(BorderSide(color: BorderEnabled ? primaryColor : Colors.transparent))),
         onPressed: action,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 15),

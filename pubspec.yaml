@@ -26,7 +26,7 @@ flutter:
   fonts:
     - family: Alexandria
       fonts:
+        - asset: assets/fonts/Alexandria/AlexandriaFLF.ttf
         - asset: assets/fonts/Alexandria/AlexandriaFLF-Bold.ttf
         - asset: assets/fonts/Alexandria/AlexandriaFLF-Italic.ttf
-        - asset: assets/fonts/Alexandria/AlexandriaFLF.ttf
 
